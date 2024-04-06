@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 20:33:28 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 21:11:23 by ohladkov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "alcu.h"
 
 int read_stdin(t_board **board)
@@ -45,12 +33,7 @@ int read_stdin(t_board **board)
 		free(tmp);
 		tmp = NULL;
 		if (nbr == -1 || out_range(nbr, 1, 10000))
-		{
-			int fd = open("/dev/null", O_RDONLY);
-			get_next_line(fd);
-			close(fd);
 			return (write(2, "ERROR\n", 6));
-		}
 		ft_add_back(board, ft_lstnew(nbr));
 	}
 	return (0);
@@ -60,7 +43,7 @@ int open_read_file(t_board **board, char *file)
 {
 	char *line = NULL;
 	char *tmp = NULL;
-	int nbr = 0;
+	int nbr;
 	int	n = 0;
 	int fd = open(file, O_RDONLY);
 
@@ -94,10 +77,6 @@ int open_read_file(t_board **board, char *file)
 		if (nbr == -1 || nbr == -1 || out_range(nbr, 1, 10000))
 		{
 			close (fd);
-			fd = open("/dev/null", O_RDONLY);
-			get_next_line(fd);
-			close(fd);
-			free(line);
 			return (write(2, "ERROR\n", 6));
 		}
 		ft_add_back(board, ft_lstnew(nbr));

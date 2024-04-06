@@ -6,13 +6,36 @@
 /*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:17 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 20:44:52 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:12:17 by ohladkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alcu.h"
 
 int g_winner = 0;
+
+void	copy_board(t_board *board)
+{
+	t_board *tmp = board;
+	int size = ft_lstsize(board);
+	int arr[size + 1];
+	int k = 0;
+	while (k < size)
+	{
+		arr[k] = tmp->objs;
+		tmp = tmp->next;
+		k++;
+	}
+	arr[k] = -1;
+	// k = 0;
+	// while (arr[k] != -1)
+	// {
+	// 	ft_putnbr_fd(arr[k], 1);
+	// 	write(1, " ", 1);
+	// 	k++;
+	// }
+	// write(1, "OK\n", 3);
+}
 
 void	announce_the_winner(void)
 {
@@ -27,8 +50,10 @@ int	run_game(t_board *board)
 	while (board)
 	{
 		print_board(board);
+		// copy_board(board);
 		set_states(board);
 		bot_turn(&board);
+		// copy_board(board);
 		print_board(board);
 		int i = get_user_input(board);
 		if (i == -2)

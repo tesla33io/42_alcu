@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   analyse_heaps.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 20:33:23 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 21:03:11 by ohladkov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "alcu.h"
 
 /*
@@ -23,33 +11,35 @@
 */
 
 // assume previous is in W state, then check if previous in L
-void	set_states(t_board *board)
+void	set_states(t_board *board, t_board *last)
 {
 	int size = ft_lstsize(board);
-	int i = 0;
-	while (i < size)
+	int i = -1;
+	while (++i < size)
 	{
-		if ((board->objs % 4) != 1) //(board->objs % 4) != 0 && 
+		if ((board->objs % 4) != 1)
 			board->state = W;
-		if ((board->objs % 4) == 1 && (board->objs % 4) != 0)
+		else if ((board->objs % 4) != 0 && (board->objs % 4) == 1)// ?
 			board->state = L;
-		if (board->prev != board->next)
+		if (board->prev != last)
 		{
 			if (board->prev->state == 0)
 			{
-				if ((board->objs % 4) != 0) // && (board->objs % 4) == 1
+				if ((board->objs % 4) != 0 && (board->objs % 4) == 1)
 					board->state = W;
 				else if ((board->objs % 4) != 1)
 					board->state = L;
 			}
 		}
-		// print_digit(board->state);//rem
-		// write(1, " ", 1); //rem
+		print_digit(board->state);//rem
+		write(1, " ", 1); //rem
 		board = board->next;
-		i++;
 	}
-	// write(1, "\n", 1); //rem
+	write(1, "\n", 1); //rem
 }
+
+int	take_last(int items);
+int	leave_last(int items);
 
 void	bot_turn(t_board **board)
 {
@@ -58,17 +48,18 @@ void	bot_turn(t_board **board)
 	if (!board)
 		return ;
 	if (tmp->prev->prev->state == L && ((*board) != (*board)->prev))
+	{
 		i = take_last(tmp->prev->objs);
+	}
 	else if (tmp->prev->prev->state == W && ((*board) != (*board)->prev))
+	{
 		i = leave_last(tmp->prev->objs);
+	}
 	else
 		i = leave_last(tmp->prev->objs);
 	tmp->prev->objs -= i;
 	if (tmp->prev->objs == 0)
-	{
-		g_winner = 1;
 		delete_last_node(board);
-	}
 	write(1, "AI took ", 9);
 	print_digit(i);
 	write(1, "\n", 1);
@@ -90,38 +81,27 @@ int	take_last(int items)
 
 int	leave_last(int items)
 {
-	int nbr = 0;
+	int nbr;
 	int rem = items % 4;
 
 	if (rem == 0)
 		nbr = 3; //?
-	else if (rem == 1)
-		nbr = 1;
-	else if (rem != 1)
+	else
 		nbr = rem - 1;
 	return (nbr);
 }
 
 int	get_user_input(t_board *board)
 {
-	int i = -1;
-	char *str = NULL;
-	int terminal_fd = open("/dev/tty", O_RDWR);
-	if (terminal_fd == -1) {
-        perror("open");
-        return (-2);
-    }
+	int i;
 	if (!board)
 		return (-1);
 	while (1)
 	{
-		write(terminal_fd, "Please choose between 1 and 3 items\n", 36);
-		str = get_next_line(terminal_fd);
+		write(1, "Please choose between 1 and 3 items\n", 36);
+		char *str = get_next_line(0);
 		if (!str)
-		{
-			close(terminal_fd);
 			return (-2);
-		}
 		if (*str == '\n')
 		{
 			free(str);
@@ -144,14 +124,7 @@ int	get_user_input(t_board *board)
 				write(2, " - Invalid choice\n", 19);
 		}
 		else
-		{
-			int fd = open("/dev/null", O_RDONLY);
-			get_next_line(fd);
-			close(fd);
-			close(terminal_fd);
 			break ;
-		}
 	}
-	close(terminal_fd);
 	return (i);
 }
