@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/06 20:34:04 by ohladkov          #+#    #+#             */
+/*   Updated: 2024/04/06 20:34:05 by ohladkov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "alcu.h"
 
 void print_board(t_board *board)
@@ -32,30 +44,6 @@ int	get_max(t_board *board)
 		size--;
 	}
 	return (max);
-}
-
-size_t	ft_arrsize(char	**arr)
-{
-	size_t	size;
-
-	size = 0;
-	while (arr[size])
-		size++;
-	return (size);
-}
-
-void	print_arr(char **arr) //rem
-{
-	int	i;
-
-	if (!arr || !*arr)
-		write(1, "no array\n", 9);
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
 }
 
 int	print_digit(int n)

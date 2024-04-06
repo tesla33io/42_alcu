@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/06 20:33:28 by ohladkov          #+#    #+#             */
+/*   Updated: 2024/04/06 20:36:14 by ohladkov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "alcu.h"
 
 int read_stdin(t_board **board)
@@ -46,10 +58,12 @@ int read_stdin(t_board **board)
 
 int open_read_file(t_board **board, char *file)
 {
+	t_board *new;
 	char *line = NULL;
 	char *tmp = NULL;
 	int nbr = 0;
 	int	n = 0;
+	int	i = 1;
 	int fd = open(file, O_RDONLY);
 
 	if (fd == -1)
@@ -88,7 +102,10 @@ int open_read_file(t_board **board, char *file)
 			free(line);
 			return (write(2, "ERROR\n", 6));
 		}
-		ft_add_back(board, ft_lstnew(nbr));
+		new = ft_lstnew(nbr);
+		ft_add_back(board, new);
+		new->nmb_heap = i;
+		i++;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alcu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:02:01 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 19:01:26 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:32:26 by ohladkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ typedef struct s_board
 	struct s_board *prev;
 } t_board;
 
-size_t	ft_arrsize(char	**arr);
-void	print_arr(char **arr);
 size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *src);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		print_digit(int n);
