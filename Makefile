@@ -78,7 +78,6 @@ $(TARGET): $(OBJ_FILES)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"info]: $(GREEN)$(BOLD)Build finished!$(RESET)"
 	-@echo -n "$(MAGENTA)" && ls -lah $(TARGET) && echo -n "$(RESET)"
-	-@./$(TARGET)
 
 #### LOCAL LIBS COMPILATION ####
 
