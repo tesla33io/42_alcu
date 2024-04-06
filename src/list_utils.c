@@ -78,12 +78,11 @@ size_t	ft_lstsize(t_board *board)
 
 void	free_list(t_board *head, t_board *last)
 {
-	if (head)
-	{
-		if (head != last)
-			free_list(head->next, last);
-		free(head);
-	}
+	if (head == NULL)
+		return ;
+	if (head != last)
+		free_list(head->next, last);
+	free(head);
 }
 
 void	print_lst(t_board *board)

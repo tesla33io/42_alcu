@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:59:08 by astavrop          #+#    #+#             */
-/*   Updated: 2023/12/19 15:52:48 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/06 11:26:14 by ohladkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

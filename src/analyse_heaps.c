@@ -11,63 +11,93 @@
 */
 
 // assume previous is in W state, then check if previous in L
-void	set_states(t_board *board, t_board *last)
+void	set_states(t_board *board)
 {
 	int size = ft_lstsize(board);
-	int i = -1;
-	while (++i < size)
+	int i = 0;
+	while (i < size)
 	{
-		if ((board->objs % 4) != 1)
+		if ((board->objs % 4) != 1) //(board->objs % 4) != 0 && 
 			board->state = W;
-		else if ((board->objs % 4) != 0)
+		if ((board->objs % 4) == 1 && (board->objs % 4) != 0)
 			board->state = L;
-		else
-			board->state = 3;
-		if (board->prev != last)
+		if (board->prev != board->next)
 		{
 			if (board->prev->state == 0)
 			{
-				if ((board->objs % 4) != 0)
+				if ((board->objs % 4) != 0) // && (board->objs % 4) == 1
 					board->state = W;
 				else if ((board->objs % 4) != 1)
 					board->state = L;
-				else
-					board->state = 3;
 			}
 		}
+		// print_digit(board->state);//rem
+		// write(1, " ", 1); //rem
 		board = board->next;
+		i++;
 	}
+	// write(1, "\n", 1); //rem
 }
 
-void	bot_turn(t_board *board)
+void	bot_turn(t_board **board)
 {
+	t_board *tmp = *board;
 	int i = 0;
-	// if (board->state == W)
-	// {
-		
-	// }
-	// else if (board->state == L)
-	// {
-
-	// }
-	// else
-
-	board->prev->objs -= i;
-	if (board->prev->objs == 0)
+	if (!board)
+		return ;
+	if (tmp->prev->prev->state == L && ((*board) != (*board)->prev))
+		i = take_last(tmp->prev->objs);
+	else if (tmp->prev->prev->state == W && ((*board) != (*board)->prev))
+		i = leave_last(tmp->prev->objs);
+	else
+		i = leave_last(tmp->prev->objs);
+	tmp->prev->objs -= i;
+	if (tmp->prev->objs == 0)
 	{
-		delete_last_node(&board);
+		g_winner = 1;
+		delete_last_node(board);
 	}
 	write(1, "AI took ", 9);
 	print_digit(i);
 	write(1, "\n", 1);
 }
 
+int	take_last(int items)
+{
+	int nbr;
+	int rem = items % 4;
+
+	if (rem == 0)
+		nbr = 1; //?
+	else if (rem == items)
+		nbr = rem;
+	else
+		nbr = rem;
+	return (nbr);
+}
+
+int	leave_last(int items)
+{
+	int nbr = 0;
+	int rem = items % 4;
+
+	if (rem == 0)
+		nbr = 3; //?
+	else if (rem == 1)
+		nbr = 1;
+	else if (rem != 1)
+		nbr = rem - 1;
+	return (nbr);
+}
+
 int	get_user_input(t_board *board)
 {
 	int i;
+	if (!board)
+		return (-1);
 	while (1)
 	{
-		write(1, "Please choose between 1 and 3 items(don;t use characters)\n", 59);
+		write(1, "Please choose between 1 and 3 items\n", 36);
 		char *str = get_next_line(0);
 		if (!str)
 			return (-2);
@@ -77,18 +107,23 @@ int	get_user_input(t_board *board)
 			str = NULL;
 			continue ;
 		}
-		i = ft_atoi(str);
+		if (isdigit_str(str))
+			i = ft_atoi(str);
+		else
+		{
+			i = -1;
+			ft_putstr_fd(str, 2);
+			write(2, " - Invalid choice\n", 19);
+		}
 		free(str);
 		str = NULL;
-		if (i == -1 || i < 0 || i > 3 || i > board->prev->objs)
+		if (i == -1 || out_range(i, 1, 3) || i > board->prev->objs)
 		{
-			print_digit(i); // not good for chars
-			write(2, " - Invalid choice\n", 19);
+			if (print_digit(i) != 0)
+				write(2, " - Invalid choice\n", 19);
 		}
 		else
 			break ;
 	}
 	return (i);
 }
-
-

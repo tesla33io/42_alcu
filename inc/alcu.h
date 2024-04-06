@@ -6,7 +6,7 @@
 /*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:02:01 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 03:00:22 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:31:52 by ohladkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define W 1
 # define L 0
 
+extern int g_winner;
 // typedef struct s_board {
 // 	char	**board;
 // 	/**********************
@@ -57,7 +58,7 @@ char	*ft_strdup(const char *src);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		print_digit(int n);
-
+void	ft_putstr_fd(char *s, int fd);
 t_board	*ft_lstnew(int val);
 void	ft_add_back(t_board **head, t_board *new_node);
 void	delete_last_node(t_board **head);
@@ -65,13 +66,14 @@ int		get_max(t_board *stack);
 size_t	ft_lstsize(t_board *board);
 void	free_list(t_board *head, t_board *last);
 void	print_lst(t_board *board);
-int 	read_f(t_board **board);
+int 	read_stdin(t_board **board);
 int		open_read_file(t_board **board, char *file);
 int		get_user_input(t_board *board);
-
-void	set_states(t_board *board, t_board *last);
+int		isdigit_str(char *s);
+int		out_range(int nbr, int min, int max);
+void	ft_putnbr_fd(int n, int fd);
+void	set_states(t_board *boar);
 void	print_board(t_board *board);
-void	bot_turn(t_board *board);
-
-
-
+void	bot_turn(t_board **board);
+int		take_last(int items);
+int		leave_last(int items);
