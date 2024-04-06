@@ -7,7 +7,7 @@ CC				:= cc
 CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3
 
 # Libraries to be linked (if any)
-LIBS			:=
+LIBS			:= -lncursesw
 
 # Include directories
 INCLUDES		:= -Iinc/
@@ -19,6 +19,8 @@ TARGET			:= im_gonna_win
 SRC_DIR			:= src/
 
 # Source files
+#SRC_FILES		+= gui/quickstart.c		# Main
+SRC_FILES		+= tui/tui.c			# Main
 SRC_FILES		+= main.c read_file.c get_next_line.c get_next_line_utils.c \
 					utils.c list_utils.c analyse_heaps.c
 
@@ -70,7 +72,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 # Rule for linking the target executable
-$(TARGET): $(OBJ_FILES) $(LIBFT_LIB)
+$(TARGET): $(OBJ_FILES)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"build]:$(GREEN)" \
 	"$(BOLD)Link$(RESET)$(GREEN) $(TARGET) $(RESET)"
