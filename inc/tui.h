@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:30:21 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 17:26:26 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:55:54 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define TUI_H
 
 # include <ncurses.h>
-
-# define SCREEN_WIDTH 80
-# define SCREEN_HEIGHT 24
-
-# define MAX_HEAPS 10000
-# define MAX_ITEMS 10000
 
 typedef struct
 {
@@ -29,6 +23,7 @@ typedef struct
 	int		board_x;
 	int		board_max;
 	int		cur_heap;
+	int		move;
 }	TUI;
 
 #endif /* TUI_H */

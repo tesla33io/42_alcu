@@ -7,7 +7,7 @@ CC				:= cc
 CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3
 
 # Libraries to be linked (if any)
-LIBS			:= -lncurses
+LIBS			:= -lncursesw
 
 # Include directories
 INCLUDES		:= -Iinc/
