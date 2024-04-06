@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:33:17 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/07 00:06:51 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 01:01:36 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <ncurses.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <locale.h>
 
@@ -42,6 +43,7 @@ TUI	*tui_init(void)
 		return (NULL);
 	}
 	setlocale(LC_ALL, "");
+	int ttfd = open("/dev/tty", O_RDWR);
 	initscr();
 	start_color();
 	cbreak();

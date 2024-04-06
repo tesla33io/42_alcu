@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:17 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/07 00:32:11 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:58:06 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "tui.h"
 
 # ifndef WITH_BONUS
-#  define WITH_BONUS 0
+#  define WITH_BONUS 1
 # endif
 
 int g_winner = 0;
@@ -103,6 +103,7 @@ int main(int ac, char **av)
 	}
 	else if (WITH_BONUS == 1)
 	{
+		//dup2(open("/dev/tty", O_RDWR), 0);
 		int		tui_board[ft_lstsize(board)];
 		TUI		*tui = tui_init();
 		int		key;
@@ -163,6 +164,8 @@ int main(int ac, char **av)
 		}
 		delwin(tui->wbody);
 		endwin();
+		if (tui)
+			free(tui);
 	}
 	return (0);
 }
