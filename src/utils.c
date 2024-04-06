@@ -76,24 +76,6 @@ int	print_digit(int n)
 	return (count);
 }
 
-char	*ft_strdup(const char *src)
-{
-	char			*s;
-	unsigned int	i;
-
-	s = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		s[i] = src[i];
-		i++;
-	}
-	s[i] = '\0';
-	return (s);
-}
-
 int	ft_isdigit(int c)
 {
 	if (c > 47 && c < 58)

@@ -21,7 +21,8 @@ int	run_game(t_board *board)
 		int i = get_user_input(board);
 		if (i == -2)
 			return (1);
-		else if (i == -1)
+		else 
+		if (i == -1)
 			return (0);
 		board->prev->objs -= i;
 		if (board->prev->objs == 0)
@@ -41,7 +42,8 @@ int main(int ac, char **av)
 	{
 		if (read_stdin(&board) != 0)
 		{
-			free_list(board, board->prev);
+			if (board)
+				free_list(board, board->prev);
 			return (1);
 		}
 	}
@@ -49,7 +51,8 @@ int main(int ac, char **av)
 	{
 		if (open_read_file(&board, av[1]) != 0)
 		{
-			free_list(board, board->prev);
+			if (board)
+				free_list(board, board->prev);
 			return (1);
 		}
 	}
@@ -57,6 +60,8 @@ int main(int ac, char **av)
 		return (write(2, "Error\n", 6));
 	if (run_game(board) != 0)
 	{
+		if (board)
+			free_list(board, board->prev);
 		return (1);
 	}
 	announce_the_winner();

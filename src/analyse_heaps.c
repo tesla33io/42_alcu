@@ -92,15 +92,24 @@ int	leave_last(int items)
 
 int	get_user_input(t_board *board)
 {
-	int i;
+	int i = -1;
+	char *str = NULL;
+	int terminal_fd = open("/dev/tty", O_RDWR);
+	if (terminal_fd == -1) {
+        perror("open");
+        return (-2);
+    }
 	if (!board)
 		return (-1);
 	while (1)
 	{
-		write(1, "Please choose between 1 and 3 items\n", 36);
-		char *str = get_next_line(0);
+		write(terminal_fd, "Please choose between 1 and 3 items\n", 36);
+		str = get_next_line(terminal_fd);
 		if (!str)
+		{
+			close(terminal_fd);
 			return (-2);
+		}
 		if (*str == '\n')
 		{
 			free(str);
@@ -123,7 +132,14 @@ int	get_user_input(t_board *board)
 				write(2, " - Invalid choice\n", 19);
 		}
 		else
+		{
+			int fd = open("/dev/null", O_RDONLY);
+			get_next_line(fd);
+			close(fd);
+			close(terminal_fd);
 			break ;
+		}
 	}
+	close(terminal_fd);
 	return (i);
 }

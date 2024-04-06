@@ -4,7 +4,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3 -fsanitize=address
+CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3 #-fsanitize=address
 
 # Libraries to be linked (if any)
 LIBS			:=
