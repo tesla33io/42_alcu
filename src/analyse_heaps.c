@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   analyse_heaps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:23 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 21:03:11 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:51:27 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alcu.h"
+#include "tui.h"
 
 /*
 - For heaps in a winning state (W), 'AI' should start first.
@@ -29,34 +30,34 @@ void	set_states(t_board *board)
 	int i = 0;
 	while (i < size)
 	{
-		if ((board->objs % 4) != 1) //(board->objs % 4) != 0 && 
+		if ((board->objs % 4) != 1)
 			board->state = W;
-		if ((board->objs % 4) == 1 && (board->objs % 4) != 0)
+		if ((board->objs % 4) == 1)
 			board->state = L;
 		if (board->prev != board->next)
 		{
-			if (board->prev->state == 0)
+			if (board->prev->state == L)
 			{
-				if ((board->objs % 4) != 0) // && (board->objs % 4) == 1
+				if ((board->objs % 4) != 0)
 					board->state = W;
-				else if ((board->objs % 4) != 1)
+				else if ((board->objs % 4) == 0)
 					board->state = L;
 			}
 		}
-		// print_digit(board->state);//rem
-		// write(1, " ", 1); //rem
+		print_digit(board->state);//rem
+		write(1, " ", 1); //rem
 		board = board->next;
 		i++;
 	}
-	// write(1, "\n", 1); //rem
+	write(1, "\n", 1); //rem
 }
 
-void	bot_turn(t_board **board)
+void	bot_turn(t_board **board, TUI *tui)
 {
-	t_board *tmp = *board;
 	int i = 0;
-	if (!board)
+	if (!board || !*board)
 		return ;
+	t_board *tmp = *board;
 	if (tmp->prev->prev->state == L && ((*board) != (*board)->prev))
 		i = take_last(tmp->prev->objs);
 	else if (tmp->prev->prev->state == W && ((*board) != (*board)->prev))
@@ -72,6 +73,8 @@ void	bot_turn(t_board **board)
 	write(1, "AI took ", 9);
 	print_digit(i);
 	write(1, "\n", 1);
+	if (tui)
+		tui->last_ai_move = i;
 }
 
 int	take_last(int items)

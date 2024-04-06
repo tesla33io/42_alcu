@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alcu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:02:01 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 20:32:26 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:16:34 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
+#include "tui.h"
 
 # define W 1
 # define L 0
@@ -71,6 +72,7 @@ int		out_range(int nbr, int min, int max);
 void	ft_putnbr_fd(int n, int fd);
 void	set_states(t_board *boar);
 void	print_board(t_board *board);
-void	bot_turn(t_board **board);
+// void	bot_turn(t_board **board);
+void	bot_turn(t_board **board, TUI *tui);
 int		take_last(int items);
 int		leave_last(int items);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:28 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 21:11:23 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:42:53 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ int read_stdin(t_board **board)
 		}
 		if (*line == '\n')
 		{
-			n = 1;
+			n += 1;
 			tmp = line;
 			free(tmp);
 			tmp = NULL;
+			if (n == 2)
+				break ;
 			continue ;
 		}
-		n = 0;
 		if (isdigit_str(line))
 			nbr = ft_atoi(line);
 		else

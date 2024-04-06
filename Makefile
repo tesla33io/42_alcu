@@ -43,6 +43,8 @@ RM				:= /bin/rm -f
 MKDIR			:= /bin/mkdir -p
 TOUCH			:= /bin/touch
 
+BONUS			= 0
+
 #### LOCAL LIBRARIES ####
 
 ## FT_PRINTF_PATH	:= ft_printf/
@@ -76,7 +78,7 @@ $(TARGET): $(OBJ_FILES)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"build]:$(GREEN)" \
 	"$(BOLD)Link$(RESET)$(GREEN) $(TARGET) $(RESET)"
-	@$(CC) $(CFLAGS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -DWITH_BONUS=$(BONUS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"info]: $(GREEN)$(BOLD)Build finished!$(RESET)"
 	-@echo -n "$(MAGENTA)" && ls -lah $(TARGET) && echo -n "$(RESET)"
