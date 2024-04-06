@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:23 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/07 00:00:39 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:31:54 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	take_last(int items)
 	int rem = items % 4;
 
 	if (rem == 0)
-		nbr = 1; //?
+		nbr = 1;
 	else if (rem == items)
 		nbr = rem;
 	else
@@ -93,7 +93,7 @@ int	leave_last(int items)
 	int rem = items % 4;
 
 	if (rem == 0)
-		nbr = 3; //?
+		nbr = 3;
 	else if (rem == 1)
 		nbr = 1;
 	else if (rem != 1)
@@ -105,11 +105,11 @@ int	get_user_input(t_board *board)
 {
 	int i = -1;
 	char *str = NULL;
+	if (!board)
+		return (-1);
 	int terminal_fd = open("/dev/tty", O_RDWR);
 	if (terminal_fd == -1)
 		return (write(2, "Open failed\n", 12), -2);
-	if (!board)
-		return (-1);
 	while (1)
 	{
 		write(terminal_fd, "Please choose between 1 and 3 items\n", 36);
@@ -149,6 +149,6 @@ int	get_user_input(t_board *board)
 			break ;
 		}
 	}
-	close(terminal_fd);
+	// close(terminal_fd);
 	return (i);
 }

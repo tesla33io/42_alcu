@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:28 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 23:42:53 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:15:43 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ int read_stdin(t_board **board)
 			free(tmp);
 			tmp = NULL;
 			if (n == 2)
+			{
+				int fd = open("/dev/null", O_RDONLY);
+				get_next_line(fd);
+				close(fd);
 				break ;
+			}
 			continue ;
 		}
 		if (isdigit_str(line))
