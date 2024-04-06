@@ -19,7 +19,8 @@ TARGET			:= im_gonna_win
 SRC_DIR			:= src/
 
 # Source files
-SRC_FILES		+= main.c		# Main
+SRC_FILES		+= main.c read_file.c get_next_line.c get_next_line_utils.c \
+					utils.c list_utils.c analyse_heaps.c
 
 # Object files directory
 OBJ_DIR			:= obj/
