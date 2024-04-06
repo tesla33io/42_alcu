@@ -6,42 +6,24 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:02:01 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 22:16:34 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:01:41 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "get_next_line.h"
-#include "tui.h"
+#ifndef ALCU_H
+# define ALCU_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include "get_next_line.h"
+# include "tui.h"
 
 # define W 1
 # define L 0
 
 extern int g_winner;
-// typedef struct s_board {
-// 	char	**board;
-// 	/**********************
-// 	 * ["||||||||||||||",
-// 	 *  "|||||||||",
-// 	 *  "|||",
-// 	 *  "|||||||||||||||||",
-// 	 *  "|||||",
-// 	 *  NULL]
-// 	 **********************/
-// 	char	**states;
-// 	/***********************
-// 	 * ["W",
-// 	 *  "L",
-// 	 *  "W",
-// 	 *  "W",
-// 	 *  "L",
-// 	 *  "W",
-// 	 *  NULL]
-// 	 **********************/
-// }	t_board;
 
 typedef struct s_board
 {
@@ -63,7 +45,6 @@ void	delete_last_node(t_board **head);
 int		get_max(t_board *stack);
 size_t	ft_lstsize(t_board *board);
 void	free_list(t_board *head, t_board *last);
-void	print_lst(t_board *board);
 int 	read_stdin(t_board **board);
 int		open_read_file(t_board **board, char *file);
 int		get_user_input(t_board *board);
@@ -72,7 +53,9 @@ int		out_range(int nbr, int min, int max);
 void	ft_putnbr_fd(int n, int fd);
 void	set_states(t_board *boar);
 void	print_board(t_board *board);
-// void	bot_turn(t_board **board);
+void	copy_board(int arr[], t_board *board);
 void	bot_turn(t_board **board, TUI *tui);
 int		take_last(int items);
 int		leave_last(int items);
+
+#endif

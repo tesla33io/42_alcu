@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:23 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 23:51:27 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:00:39 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 - Heap analysis starts from the top.
 - The winning state of the first heap is determined by len(heap) % 4 != 1.
 - Subsequent heap states depend on the state of the previous heap:
-  - If the current heap is winning (W), all heaps below it are winning if len(heap_n) % 4 != 1.
-  - If the current heap is losing (L), all heaps below it are winning if len(heap_n) % 4 != 0.
+- If the current heap is winning (W), all heaps below it are winning if len(heap_n) % 4 != 1.
+- If the current heap is losing (L), all heaps below it are winning if len(heap_n) % 4 != 0.
 */
 
-// assume previous is in W state, then check if previous in L
 void	set_states(t_board *board)
 {
 	int size = ft_lstsize(board);
@@ -44,12 +43,9 @@ void	set_states(t_board *board)
 					board->state = L;
 			}
 		}
-		print_digit(board->state);//rem
-		write(1, " ", 1); //rem
 		board = board->next;
 		i++;
 	}
-	write(1, "\n", 1); //rem
 }
 
 void	bot_turn(t_board **board, TUI *tui)
@@ -110,10 +106,8 @@ int	get_user_input(t_board *board)
 	int i = -1;
 	char *str = NULL;
 	int terminal_fd = open("/dev/tty", O_RDWR);
-	if (terminal_fd == -1) {
-        perror("open");
-        return (-2);
-    }
+	if (terminal_fd == -1)
+		return (write(2, "Open failed\n", 12), -2);
 	if (!board)
 		return (-1);
 	while (1)

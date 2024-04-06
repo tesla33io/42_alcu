@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:33:17 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/06 23:30:50 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:06:51 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <ncurses.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include <stdio.h> /* WARN: DEL*/
 #include <stdlib.h>
 #include <locale.h>
 
@@ -40,7 +39,7 @@ TUI	*tui_init(void)
 	if (!tui)
 	{
 		ft_dputs(1, "TUI mem allocation failed\n");
-		exit(1);
+		return (NULL);
 	}
 	setlocale(LC_ALL, "");
 	initscr();
@@ -80,26 +79,26 @@ size_t	get_board_len(int *board)
 void	print_header(TUI *tui, const char *text, int y_pos)
 {
 	int x, y;
-	getmaxyx(tui->wbody, y, x); // Get the dimensions of the window
-    mvwprintw(tui->wbody, y_pos, (x - ft_tui_strlen(text))/2, "%s", text); // Print the text in the upper middle of the window
-	wrefresh(tui->wbody); // Refresh the window
+	getmaxyx(tui->wbody, y, x);
+	mvwprintw(tui->wbody, y_pos, (x - ft_tui_strlen(text))/2, "%s", text);
+	wrefresh(tui->wbody);
 }
 
 void	print_move(TUI *tui, int move, int y_pos)
 {
 	int x, y;
-	getmaxyx(tui->wbody, y, x); // Get the dimensions of the window
-    mvwprintw(tui->wbody, y_pos, (x - ft_tui_strlen("Move:   "))/2, "Move: %d", move); // Print the text in the upper middle of the window
-	wrefresh(tui->wbody); // Refresh the window
+	getmaxyx(tui->wbody, y, x);
+	mvwprintw(tui->wbody, y_pos, (x - ft_tui_strlen("Move:   "))/2, "Move: %d", move);
+	wrefresh(tui->wbody);
 }
 
 void	print_ai_move(TUI *tui, int y_pos)
 {
 	int x, y;
-	getmaxyx(tui->wbody, y, x); // Get the dimensions of the window
-    mvwprintw(tui->wbody, y_pos, 
-		(x - ft_tui_strlen("AI took   "))/2, "AI took %d", tui->last_ai_move); // Print the text in the upper middle of the window
-	wrefresh(tui->wbody); // Refresh the window
+	getmaxyx(tui->wbody, y, x);
+	mvwprintw(tui->wbody, y_pos,
+		(x - ft_tui_strlen("AI took   "))/2, "AI took %d", tui->last_ai_move); 
+	wrefresh(tui->wbody);
 }
 
 void	print_result(TUI *tui)
@@ -256,7 +255,7 @@ void	print_options(TUI *tui, int a)
 		x_pos += 3 * i;
 		print_ascii_digit(tui, i + 1, a >= (i + 1) ? 1 : 2, x_pos, y_pos);
 	}
-	wrefresh(tui->wbody); // Refresh the window
+	wrefresh(tui->wbody);
 }
 
 int	update_board(TUI *tui, int num, int *board)
@@ -271,15 +270,16 @@ int	update_board(TUI *tui, int num, int *board)
 	return (board[blen]);
 }
 
+/*
 int	main2(void)
 {
 	int		board[] = {
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, -42};/*
+		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, -42};
 		21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
 		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 		21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 4,
 		-42
-	};*/
+	};
 	
 	TUI		*tui = tui_init();
 	int		key;
@@ -327,3 +327,4 @@ int	main2(void)
 	endwin();
 	return (0);
 }
+*/

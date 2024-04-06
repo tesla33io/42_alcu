@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohladkov <ohladkov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:34:14 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 20:34:16 by ohladkov         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:01:29 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,3 @@ void	free_list(t_board *head, t_board *last)
 	free(head);
 }
 
-void	print_lst(t_board *board)
-{
-	size_t	size;
-	size_t	i;
-
-	i = 0;
-	size = ft_lstsize(board);
-	while (i < size)
-	{
-		printf("%d - %d state: %i\n", board->nmb_heap, board->objs, board->state);
-		board = board->next;
-		i++;
-	}
-	if (!board)
-		printf("lst = NULL\n");
-}

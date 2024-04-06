@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:17 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/06 23:51:35 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:02:00 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	copy_board(int arr[], t_board *board)
 {
 	t_board *tmp = board;
 	int size = ft_lstsize(board);
-	// arr[size + 1];
 	int k = 0;
 	while (k < size)
 	{
@@ -68,7 +67,6 @@ int	run_game(t_board *board)
 
 int main(int ac, char **av)
 {
-	printf("%d\n\n", WITH_BONUS);
 	t_board *board = NULL;
 
 	if (ac == 1)
@@ -152,9 +150,6 @@ int main(int ac, char **av)
 							g_winner = 0;
 							delete_last_node(&board);
 						}
-						// tui_board[blen - 1] -= num;
-						// if (tui_board[blen - 1] == 0)
-						// 	tui_board[blen - 1] = -42;
 						tui->move++;
 					}
 					break;
