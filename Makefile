@@ -7,7 +7,7 @@ CC				:= cc
 CFLAGS			:= -Wall -Werror -Wextra -pedantic -O3
 
 # Libraries to be linked (if any)
-LIBS			:= -lSDL2
+LIBS			:= -lncurses
 
 # Include directories
 INCLUDES		:= -Iinc/
@@ -20,10 +20,7 @@ SRC_DIR			:= src/
 
 # Source files
 #SRC_FILES		+= gui/quickstart.c		# Main
-SRC_FILES		+= gui/gui.c			# Main
-SRC_FILES		+= gui/init.c			# Init
-SRC_FILES		+= gui/input.c			# Input
-SRC_FILES		+= gui/draw.c			# Draw
+SRC_FILES		+= tui/tui.c			# Main
 
 # Object files directory
 OBJ_DIR			:= obj/
