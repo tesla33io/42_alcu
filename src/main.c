@@ -6,16 +6,16 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:17 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/07 00:58:06 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:49:02 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "alcu.h"
 #include "tui.h"
 
-# ifndef WITH_BONUS
-#  define WITH_BONUS 1
-# endif
+/*#ifndef WITH_BONUS
+# define WITH_BONUS 1
+#endif*/
 
 int g_winner = 0;
 
@@ -91,8 +91,7 @@ int main(int ac, char **av)
 		return (write(2, "Error\n", 6));
 	if (!board)
 		return (write(2, "ERROR\n", 6));
-	if (WITH_BONUS == 0)
-	{
+	#if !WITH_BONUS
 		if (run_game(board) != 0)
 		{
 			if (board)
@@ -100,10 +99,9 @@ int main(int ac, char **av)
 			return (1);
 		}
 		announce_the_winner();
-	}
-	else if (WITH_BONUS == 1)
-	{
-		//dup2(open("/dev/tty", O_RDWR), 0);
+	#else // WITH_BONUS
+		int	ttyfd = open("/dev/tty", O_RDWR);
+		dup2(ttyfd, 0);
 		int		tui_board[ft_lstsize(board)];
 		TUI		*tui = tui_init();
 		int		key;
@@ -164,8 +162,12 @@ int main(int ac, char **av)
 		}
 		delwin(tui->wbody);
 		endwin();
+		for (; board != NULL;)
+			delete_last_node(&board);
 		if (tui)
 			free(tui);
-	}
+		if (ttyfd >= 0)
+			close(ttyfd);
+	#endif
 	return (0);
 }

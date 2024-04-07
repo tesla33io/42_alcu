@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:28 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/07 00:15:43 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:53:34 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int open_read_file(t_board **board, char *file)
 		if (!line)
 		{
 			if (n == 0)
-				return (write(2, "ERROR\n", 6));
+				return (close(fd), write(2, "ERROR\n", 6));
 			break ;
 		}
 		if (*line == '\n')
@@ -108,6 +108,7 @@ int open_read_file(t_board **board, char *file)
 		}
 		ft_add_back(board, ft_lstnew(nbr));
 	}
+	close(fd);
 	return (0);
 }
 

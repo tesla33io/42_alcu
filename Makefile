@@ -43,7 +43,9 @@ RM				:= /bin/rm -f
 MKDIR			:= /bin/mkdir -p
 TOUCH			:= /bin/touch
 
-BONUS			= 0
+#### SPECIAL VARIABLES ####
+
+RUN_BONUS			?= 0
 
 #### LOCAL LIBRARIES ####
 
@@ -71,17 +73,22 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo "$(BLUE)[$(TARGET) -" \
 	"build]:$(CYAN)" \
 	"$(BOLD)compile$(RESET)$(CYAN) $@ $(RESET)"
-	@$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) -DWITH_BONUS=$(RUN_BONUS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 # Rule for linking the target executable
 $(TARGET): $(OBJ_FILES)
+	@echo $(RUN_BONUS)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"build]:$(GREEN)" \
 	"$(BOLD)Link$(RESET)$(GREEN) $(TARGET) $(RESET)"
-	$(CC) $(CFLAGS) -DWITH_BONUS=$(BONUS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -DWITH_BONUS=$(RUN_BONUS) -o $(TARGET) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	@echo "$(BLUE)[$(TARGET) -" \
 	"info]: $(GREEN)$(BOLD)Build finished!$(RESET)"
 	-@echo -n "$(MAGENTA)" && ls -lah $(TARGET) && echo -n "$(RESET)"
+
+bonus: ## Run program with bonus part
+	RUN_BONUS ?= 1
+	$(MAKE)
 
 #### LOCAL LIBS COMPILATION ####
 
@@ -117,7 +124,7 @@ help: ## Show help info
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "$(CYAN)%-30s$(RESET) %s\n", $$1, $$2}'
 
-.PHONY: all re clean fclean help
+.PHONY: all re clean fclean help bonus
 
 #### COLORS ####
 # Color codes

@@ -1,0 +1,66 @@
+{
+    leak initscr
+    Memcheck:Leak
+    ...
+    fun:initscr
+}
+{
+    leak mvwprintw
+    Memcheck:Leak
+    ...
+    fun:mvwprintw
+}
+{
+    leak start_color_sp
+    Memcheck:Leak
+    ...
+    fun:start_color_sp
+}
+{
+    leak _nc_keypad
+    Memcheck:Leak
+    ...
+    fun:_nc_keypad
+}
+{
+    leak wrefresh
+    Memcheck:Leak
+    ...
+    fun:wrefresh
+}
+{
+    leak tsearch
+    Memcheck:Leak
+    ...
+    fun:tsearch
+}
+{
+    leak wrefresh
+    Memcheck:Cond
+    ...
+    fun:wrefresh
+}
+{
+    leak wattr_off
+    Memcheck:Cond
+    ...
+    fun:wattr_off
+}
+{
+    leak wattr_on
+    Memcheck:Cond
+    ...
+    fun:wattr_on
+}
+{
+    leak mvwprintw
+    Memcheck:Cond
+    ...
+    fun:mvwprintw
+}
+{
+    leak wrefresh
+    Memcheck:Value8
+    ...
+    fun:wrefresh
+}

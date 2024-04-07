@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:02:01 by astavrop          #+#    #+#             */
-/*   Updated: 2024/04/07 00:12:26 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:28:09 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # define W 1
 # define L 0
+
+#ifndef WITH_BONUS
+# define WITH_BONUS 0
+#endif
 
 extern int g_winner;
 
