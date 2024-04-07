@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:33:23 by ohladkov          #+#    #+#             */
-/*   Updated: 2024/04/07 00:31:54 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:57:34 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	set_states(t_board *board)
 			board->state = W;
 		if ((board->objs % 4) == 1)
 			board->state = L;
-		if (board->prev != board->next)
+		if (board->prev != board->next && i != 0)
 		{
 			if (board->prev->state == L)
 			{
